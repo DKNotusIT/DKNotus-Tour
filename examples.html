@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DK Notus Tour - Examples</title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> 
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="dknotus-tour.js"></script>
+  <script type="text/javascript">
+  </script>
+</head>
+<body>
+    <div id="start" class="container">
+      <div class="panel btn-group pull-right">
+        <a href="http://www.dknotus.pl/" target="dkn" class="btn btn-default">DK Notus</a>
+        <a href="https://github.com/DKNotusIT" target="gh" class="btn btn-default">@ GitHub</a>        
+      </div>
+
+      <div class="page-header">
+        <h1>DK Notus Tour <small>Examples</small></h1>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-9" style="height: 1200px">
+          <p class="lead">
+            This is compact solution for guided tours though web pages that we have developed because we havent found any
+            as small and as simple. It requires only two very common dependencies: <strong>jQuery</strong>
+            and <strong>Bootstrap</strong>. We hope you enjoy it.
+          </p>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <h2 id="features">1. Features</h2>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <h2 id="simple">2. Simple use case</h2>
+
+          <p>Lets start with two step tour for elements below:</p>
+
+          <div class="row navbar">
+            <div class="col-md-2">
+              <button id="btn1" class="btn btn-lg btn-primary">#btn1</button>
+            </div>
+            <div class="col-md-2">
+              <button id="btn2" class="btn btn-lg btn-success">#btn2</button>
+            </div>
+          </div>
+
+          <div class="navbar">
+            <button id="simpleBtn" class="btn btn-default">
+              <span class="glyphicon glyphicon-gift"></span>
+              Simple tour: click to run the example.
+            </button>
+          </div>
+
+          <p>
+            First of all we need to include two common libraries <strong>jQuery</strong> and <strong>Bootstrap</strong>.
+            You ca use some CDN for that.
+          </p>
+
+          <div class="highlight">
+            <pre>  &lt;link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> 
+  &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;</pre>
+          </div>
+
+          <p>
+            Then it's time tour library <code>dknotus-tour.js</code> or <code>dknotus-tour.min.js</code>.
+          </p>
+
+
+          <div class="highlight">
+            <pre>  &lt;script src="dknotus-tour.js"&gt;&lt;/script&gt;</pre>
+          </div>
+
+          <p>
+            Finally we can define our own tour and run it with <code>Tour.run()</code>. Yes, it's that simple.
+          </p>
+
+          <script>
+            $(function(){
+              $('#simpleBtn').click(function(){
+                Tour.run([
+                  {
+                    element: $('#btn1'),
+                    content: 'first btn'
+                  },
+                  {
+                    element: $('#btn2'),
+                    content: 'and the second one'
+                  },
+                ]);
+              });
+            });
+          </script>
+
+          <div class="highlight">
+            <pre>
+  $(function(){
+    $('#simpleBtn').click(function(){
+      Tour.run([
+        {
+          element: $('#btn1'),
+          content: 'first btn'
+        },
+        {
+          element: $('#btn2'),
+          content: 'and the second one'
+        },
+      ]);
+    });
+  });
+            </pre>
+          </div>
+
+          <h2 id="positions">3. Different tour positions</h2>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <h2 id="dark">4. Alown in the dark</h2>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <h2 id="events">5. Events</h2>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <h2 id="options">6. More configuration options</h2>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <h2 id="contact">7. Contact</h2>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+
+          <hr/>
+          <small class="pull-right">No animals were harmed during development.</small>
+
+        </div>
+
+        <div class="col-xs-3">
+          <div class="list-group" style="position: fixed">
+            <a href="#start" class="list-group-item active"><strong>0. Start</strong></a>
+            <a href="#features" class="list-group-item">1. Features</a>
+            <a href="#simple" class="list-group-item">2. Simple use case</a>
+            <a href="#positions" class="list-group-item">3. Different tour positions</a>
+            <a href="#dark" class="list-group-item">4. Alown in the dark</a>
+            <a href="#events" class="list-group-item">5. Events</a>
+            <a href="#options" class="list-group-item">6. More configuration options</a>
+            <a href="#contact" class="list-group-item">7. Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
