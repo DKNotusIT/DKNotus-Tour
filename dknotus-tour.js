@@ -11,14 +11,12 @@ var Tour = (function(){
       return;
     }
 
-    console.log(o);
     for (var k in o) {
       if (typeof t[n][k] == 'undefined')
       {
         t[n][k] = o[k];
       }
     };
-    console.log(t[n]);
 
     $('body').append([
       '<div class="tourStep popover" step="' + n + '">',
@@ -39,19 +37,25 @@ var Tour = (function(){
       '</div>'
     ].join(''));
 
-    var el = $('.tourStep[step="' + n + '"]').addClass(t[n].position),
+    if (true)
+    {
+      $('body').append(Array(5).join('<div class="tourBg"></div>'));
+    }
+
+    var el = $('.tourStep')
+          .addClass(t[n].position)
+          .css({
+            minWidth: 250
+          }),
         x = 0,
         y = 0;
-
-    // if (v.width) hint.css({'max-width': v.width});
 
     if (t[n].element && !!t[n].element.length)
     {
       var x1 = 0xffff,
           y1 = 0xffff,
           x2 = 0,
-          y2 = 0,
-          padding = 3; //!!!
+          y2 = 0;
 
       t[n].element.each(function(k, v){
         var ofs = $(v).offset();
@@ -99,21 +103,39 @@ var Tour = (function(){
       };
     };
 
-/*      if (typeof v.shine == 'undefined')
-      {
-        v.shine = [x1 - padding, y1 - padding, x2 + padding, y2 + padding].join(',');
-      }
-
-      if (v.shine !== false) hint.attr('shine', v.shine);*/
-
     el
       .css({
         position: 'absolute',
         left: x,
-        top: y,
-        minWidth: 250
+        top: y
       })
       .show();
+
+    if (true)
+    {
+      var p = t[n].padding;
+
+      var pos = [
+        {bottom: 'auto', height: y1 - p},
+        {top: y2 + p, height: $(document).height() - y2 - p},
+        {right: 'auto', bottom: 'auto', top: y1 - p, width: x1 - p, height: 2 * p + y2 - y1},
+        {left: x2 + p, bottom: 'auto', top: y1 - p, height: 2 * p + y2 - y1}
+      ];
+
+      $('.tourBg')
+        .css({
+          position: 'absolute',
+          zIndex: 1000,
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          background: '#000',
+          opacity: 0.3
+        }).each(function(k, v){
+          $(v).css(pos[k]);
+        });
+    }
 
     if (!n)
     {
@@ -142,7 +164,8 @@ var Tour = (function(){
 
         o = {
           close: true,
-          position: 'right'
+          position: 'right',
+          padding: 5
         };
 
         $(tour).each(function(k, v){
