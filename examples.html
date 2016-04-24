@@ -4,17 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DK Notus Tour - Examples</title>
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="dknotus-tour.js"></script>
   <script type="text/javascript">
+    $(function(){
+      var lst = [];
+
+      $('#languagesList dd').each(function(k, v){
+        lst.push('<li>' + $(v).text() + '</li>');
+      });
+
+      $('#languages').html(lst.join(''));
+      $('#languagesCount').html(lst.length);
+    });
   </script>
 </head>
 <body>
     <div id="start" class="container">
       <div class="panel btn-group pull-right">
         <a href="http://www.dknotus.pl/" target="dkn" class="btn btn-default">DK Notus</a>
-        <a href="https://github.com/DKNotusIT" target="gh" class="btn btn-default">@ GitHub</a>        
+        <a href="https://github.com/DKNotusIT" target="gh" class="btn btn-default">@ GitHub</a>
       </div>
 
       <div class="page-header">
@@ -29,11 +39,33 @@
             and <strong>Bootstrap</strong>. We hope you enjoy it.
           </p>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <p>
+            We tryed to keep all data regarding usage as short as useable, and as short as possible.
+          </p>
 
           <h2 id="features">1. Features</h2>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <p>
+            Features that we considerble important:
+          </p>
+
+          <dl class="dl-horizontal">
+            <td>small requirenments</td>
+            <dd>only <strong>jQuery</strong> and <strong>Bootstrap</strong>;</td>
+
+            <td>simple usage</td>
+            <dd>one function ffor basic usage - yes, it' that simple;</td>
+
+            <td>events</td>
+            <dd>for advanced programers usage;</td>
+
+            <td>scroll</td>
+            <dd>it's important for us, so it might be important for you;</td>
+
+            <td>translations</td>
+            <dd><span id="languagesCount"></span> languages:<ul id="languages">
+            </ul></td>
+          </dl>
 
           <h2 id="simple">2. Simple use case</h2>
 
@@ -61,14 +93,13 @@
           </p>
 
           <div class="highlight">
-            <pre>  &lt;link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> 
+            <pre>  &lt;link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;</pre>
           </div>
 
           <p>
             Then it's time tour library <code>dknotus-tour.js</code> or <code>dknotus-tour.min.js</code>.
           </p>
-
 
           <div class="highlight">
             <pre>  &lt;script src="dknotus-tour.js"&gt;&lt;/script&gt;</pre>
@@ -88,7 +119,7 @@
                   },
                   {
                     element: $('#btn2'),
-                    content: 'and the second one'
+                    content: 'and the second one<br>description might be <strong>HTML</strong>'
                   },
                 ]);
               });
@@ -106,7 +137,7 @@
         },
         {
           element: $('#btn2'),
-          content: 'and the second one'
+          content: 'and the second one&lt;br&gt;description might be &lt;strong&gt;HTML&lt;/strong&gt;'
         },
       ]);
     });
@@ -116,23 +147,287 @@
 
           <h2 id="positions">3. Different tour positions</h2>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <div class="row navbar text-center">
+            <h2><div id="posBtn" class="label label-primary">Jump around</div></h2>
+          </div>
 
-          <h2 id="dark">4. Alown in the dark</h2>
+          <div class="navbar">
+            <button id="positionsBtn" class="btn btn-default">
+              <span class="glyphicon glyphicon-gift"></span>
+              Different positions: click to run the example.
+            </button>
+          </div>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <script>
+            $(function(){
+              $('#positionsBtn').click(function(){
+                Tour.run([
+                  {
+                    element: $('#posBtn'),
+                    content: 'by default tour is on the right'
+                  },
+                  {
+                    element: $('#posBtn'),
+                    content: 'but it can be on top',
+                    position: 'top'
+                  },
+                  {
+                    element: $('#posBtn'),
+                    content: 'bottom',
+                    position: 'bottom'
+                  },
+                  {
+                    element: $('#posBtn'),
+                    content: 'and finally on the left',
+                    position: 'left'
+                  }
+                ]);
+              });
+            });
+          </script>
 
-          <h2 id="events">5. Events</h2>
+          <div class="highlight">
+            <pre>
+  $(function(){
+    $('#positionsBtn').click(function(){
+      Tour.run([
+        {
+          element: $('#posBtn'),
+          content: 'by default tour is on the right'
+        },
+        {
+          element: $('#posBtn'),
+          content: 'but it can be on top',
+          position: 'top'
+        },
+        {
+          element: $('#posBtn'),
+          content: 'bottom',
+          position: 'bottom'
+        },
+        {
+          element: $('#posBtn'),
+          content: 'and finally on the left',
+          position: 'left'
+        }
+      ]);
+    });
+  });</pre>
+          </div>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <h2 id="parameters">4. Global and local parameters</h2>
 
-          <h2 id="options">6. More configuration options</h2>
+          <p>
+            Tour may be run with two parameters: tour description (mandatory) and global options (optional)
+            <code>Tour.run(tourDescription, options)</code>. If for some tour hint some parameter is not set,
+            then if it's possible it's taken from options.
+          </p>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <h4>Possible parameters for hints descriptions and for global options</h4>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Default&nbsp;value</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>element</td>
+                <td><em>none</em></td>
+                <td>jQuery element (might be more then one), if it's not set then hint is skiped.</td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td><em>empty string</em></td>
+                <td>It's for contents of particular hints.</td>
+              </tr>
+              <tr>
+                <td>close</td>
+                <td>true</td>
+                <td>Defines if close button should be shown.</td>
+              </tr>
+              <tr>
+                <td>language</td>
+                <td>en</td>
+                <td>
+                  Defines interface language. Available languages:
+                  <dl id="languagesList" class="dl-horizontal">
+                    <td>en</td>
+                    <dd>English</td>
+
+                    <td>pl</td>
+                    <dd>Polish</td>
+                  </dl>
+                </td>
+              </tr>
+              <tr>
+                <td>padding</td>
+                <td>3</td>
+                <td>Extra space around tour exposed elements. (Has only sense when sptlight option is true).</td>
+              </tr>
+              <tr>
+                <td>position</td>
+                <td>right</td>
+                <td>
+                  Determines where hint shoul be shown relativly to element it describes.<br>
+                  Possible values: right, left, top and bottom.
+                </td>
+              </tr>
+              <tr>
+                <td>scroll</td>
+                <td>true</td>
+                <td>If true then scrolls window so selected element and hint would be as close as possible to the view center.</td>
+              </tr>
+              <tr>
+                <td>spotlight</td>
+                <td>true</td>
+                <td>If true then covers everything except selected element and hint with shadow.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            All above options can be used for both: single hint description and for global options.
+            With global options previous example can be writen like:
+          </p>
+
+          <div class="highlight">
+            <pre>
+  $(function(){
+    $('#positionsShorterBtn').click(function(){
+      var globalOptions = {element: $('#posBtn')};
+
+      var tourDescription = [
+        {
+          content: 'by default tour is on the right'
+        },
+        {
+          content: 'but it can be on top',
+          position: 'top'
+        },
+        {
+          content: 'bottom',
+          position: 'bottom'
+        },
+        {
+          content: 'and finally on the left',
+          position: 'left'
+        }
+      ];
+
+      Tour.run(tourDescription, globalOptions);
+    });
+  });</pre>
+          </div>
+
+          <div class="navbar">
+            <button id="positionsShorterBtn" class="btn btn-default">
+              <span class="glyphicon glyphicon-gift"></span>
+              Different positions but shorter: click to run the example.
+            </button>
+          </div>
+
+          <h2 id="events">5. Events example</h2>
+
+          <p>
+            There are four events that can be used by developers:
+          </p>
+
+          <dl class="dl-horizontal">
+            <dt>onstart</dt>
+            <dd>Trigered when new tour starts ( <code>Tour.run()</code> ).</dd>
+
+            <dt>onfinish</dt>
+            <dd>Triggered when Finish button is clicked.</dd>
+
+            <dt>onclose</dt>
+            <dd>Triggered when Close button is pressed ( <code>Tour.close()</code> ).</dd>
+
+            <dt>onstep</dt>
+            <dd>Triggered on every step shown ( <code>Tour.next()</code> or <code>Tour.prev()</code> ).</dd>
+
+            <dt>onresize</dt>
+            <dd>By default this one is set.</dd>
+          </dl>
+
+          <h2 id="interface">6. Tour interface</h2>
+
+          <h3>Methods</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tour.run( tourDescription, globlOptions )</td>
+                <td>Function for running Tour.</td>
+              </tr>
+              <tr>
+                <td>Tour.next()</td>
+                <td>Goes to next tour step.</td>
+              </tr>
+              <tr>
+                <td>Tour.prev()</td>
+                <td>Goes to previous tour step.</td>
+              </tr>
+              <tr>
+                <td>Tour.close()</td>
+                <td>Interupts tour and closes it.</td>
+              </tr>
+              <tr>
+                <td>Tour.current()</td>
+                <td>Returns current step description.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Events</h3>
+
+          <p>
+            By default all except onresize are set to null.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tour.onstart</td>
+                <td>Trigered when new tour starts ( <code>Tour.run()</code> ).</td>
+              </tr>
+              <tr>
+                <td>Tour.onfinish</td>
+                <td>Triggered when Finish button is clicked.</td>
+              </tr>
+              <tr>
+                <td>Tour.onclose</td>
+                <td>Triggered when Close button is pressed ( <code>Tour.close()</code> ).</td>
+              </tr>
+              <tr>
+                <td>Tour.onstep</td>
+                <td>Triggered on every step shown ( <code>Tour.next()</code> or <code>Tour.prev()</code> ).</td>
+              </tr>
+              <tr>
+                <td>Tour.onresize</td>
+                <td>By default this one is set.</td>
+              </tr>
+            </tbody>
+          </table>
 
           <h2 id="contact">7. Contact</h2>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis fuga nihil, optio numquam pariatur, nulla itaque earum excepturi consectetur dolor natus iusto quae enim labore molestias officiis, quam odit sed?</p>
+          <p></p>
 
           <hr/>
           <small class="pull-right">No animals were harmed during development.</small>
@@ -145,9 +440,9 @@
             <a href="#features" class="list-group-item">1. Features</a>
             <a href="#simple" class="list-group-item">2. Simple use case</a>
             <a href="#positions" class="list-group-item">3. Different tour positions</a>
-            <a href="#dark" class="list-group-item">4. Alown in the dark</a>
-            <a href="#events" class="list-group-item">5. Events</a>
-            <a href="#options" class="list-group-item">6. More configuration options</a>
+            <a href="#parameters" class="list-group-item">4. Global and local parameters</a>
+            <a href="#events" class="list-group-item">5. Events example</a>
+            <a href="#interface" class="list-group-item">6. Tour interface</a>
             <a href="#contact" class="list-group-item">7. Contact</a>
           </div>
         </div>

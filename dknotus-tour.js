@@ -1,5 +1,29 @@
 var Tour = (function(){
-  var t, o, cur;
+  var t = [],
+      o, cur
+      T = {
+        step: {
+          en: 'step',
+          pl: 'krok'
+        },
+        next: {
+          en: 'Next',
+          pl: 'Nastepny'
+        },
+        prev: {
+          en: 'Previous',
+          pl: 'Poprzedni'
+        },
+        finish: {
+          en: 'Finish',
+          pl: 'Zakończ'
+        },
+      };
+
+  function _t(s)
+  {
+    return typeof T[s][t[cur].language] == 'undefined' ? T[s]['en'] : T[s][t[cur].language];
+  }
 
   function step(n)
   {
@@ -11,13 +35,6 @@ var Tour = (function(){
       return;
     }
 
-    for (var k in o) {
-      if (typeof t[n][k] == 'undefined')
-      {
-        t[n][k] = o[k];
-      }
-    };
-
     $('body').append([
       '<div class="tourStep popover" step="' + n + '">',
         '<div class="arrow"></div>',
@@ -28,19 +45,14 @@ var Tour = (function(){
           '</div>',
           '<div class="panel-footer">',
             '<div class="pull-right">',
-              '<div class="tourPrev btn btn-default btn-sm">Previous</div> ',
-              '<div class="tourNext btn btn-primary btn-sm">Next</div>',
+              '<div class="tourPrev btn btn-default btn-sm">' + _t('prev') + '</div> ',
+              '<div class="tourNext btn btn-primary btn-sm">' + _t('next') + '</div>',
             '</div>',
-            '<h6>step ' + (n + 1) + ' / ' + t.length + '</h6>',
+            '<h6>' + _t('step') + ' ' + (n + 1) + ' / ' + t.length + '</h6>',
           '</div>',
         '</div>',
       '</div>'
     ].join(''));
-
-    if (true)
-    {
-      $('body').append(Array(5).join('<div class="tourBg"></div>'));
-    }
 
     var el = $('.tourStep')
           .addClass(t[n].position)
@@ -52,8 +64,8 @@ var Tour = (function(){
 
     if (t[n].element && !!t[n].element.length)
     {
-      var x1 = 0xffff,
-          y1 = 0xffff,
+      var x1 = 1e6,
+          y1 = 1e6,
           x2 = 0,
           y2 = 0;
 
@@ -61,7 +73,7 @@ var Tour = (function(){
         var ofs = $(v).offset();
         x1 = Math.min(x1, ofs.left);
         y1 = Math.min(y1, ofs.top);
-        
+
         x2 = Math.max(x2, ofs.left
           + parseInt($(v).css('border-left-width'))
           + parseInt($(v).css('padding-left'))
@@ -111,15 +123,33 @@ var Tour = (function(){
       })
       .show();
 
-    if (true)
+    if (t[n].spotlight)
     {
       var p = t[n].padding;
+      $('body').append(Array(5).join('<div class="tourBg"></div>'));
 
       var pos = [
-        {bottom: 'auto', height: y1 - p},
-        {top: y2 + p, height: $(document).height() - y2 - p},
-        {right: 'auto', bottom: 'auto', top: y1 - p, width: x1 - p, height: 2 * p + y2 - y1},
-        {left: x2 + p, bottom: 'auto', top: y1 - p, height: 2 * p + y2 - y1}
+        {
+          bottom: 'auto',
+          height: y1 - p
+        },
+        {
+          top: y2 + p,
+          height: $(document).height() - y2 - p
+        },
+        {
+          right: 'auto',
+          bottom: 'auto',
+          top: y1 - p,
+          width: x1 - p,
+          height: 2 * p + y2 - y1
+        },
+        {
+          left: x2 + p,
+          bottom: 'auto',
+          top: y1 - p,
+          height: 2 * p + y2 - y1
+        }
       ];
 
       $('.tourBg')
@@ -137,6 +167,17 @@ var Tour = (function(){
         });
     }
 
+    if (!!t[n].scroll)
+    {
+      var my = ((Math.min(y, y1) + Math.max(y + el.height(), y2)) >> 1) - ($(window).height() >> 1),
+          mx = ((Math.min(x, x1) + Math.max(x + el.width(),  x2)) >> 1) - ($(window).width()  >> 1);
+
+      $('html, body').animate({
+        scrollTop:  Math.max(0, Math.min(y, y1, my)),
+        scrollLeft: Math.max(0, Math.min(x, x1, mx))
+      });
+    }
+
     if (!n)
     {
       $('.tourPrev').remove();
@@ -144,55 +185,124 @@ var Tour = (function(){
 
     if (n > t.length - 2)
     {
-      $('.tourNext').text('Finish');
+      $('.tourNext').text(_t('finish'));
     }
 
     $('.tourNext').click(Tour.next);
     $('.tourPrev').click(Tour.prev);
-
-    $('.tourClose').click(function(){
-      step(-1);
-    });
+    $('.tourClose').click(Tour.close);
   }
 
-  return {
-    run: function(tour, options)
+  $(window).on('resize', function(){
+    if (!!Tour.onresize)
     {
-      try {
+      Tour.onresize();
+    }
+  });
+
+  return {
+    run: function(tour, options){
+      try
+      {
         t = [];
         cur = 0;
 
         o = {
           close: true,
+          content: '',
+          language: 'en',
+          padding: 3,
           position: 'right',
-          padding: 5
+          scroll: true,
+          spotlight: true
         };
 
+        $(options).each(function(k, v){
+          o[k] = v;
+        });
+
         $(tour).each(function(k, v){
+          for (var kk in o) {
+            if (typeof v[kk] == 'undefined')
+            {
+              v[kk] = o[kk];
+            }
+          };
+
           if (v.element && !!v.element.length)
           {
             t.push(v);
           }
         });
 
-        $(options).each(function(k, v){
-          o[k] = v;
-        });
-
         step(cur);
-      } catch(e) {}
+
+        if (!!Tour.onstart)
+        {
+          Tour.onstart();
+        }
+      }
+      catch(e)
+      {}
     },
 
     next: function(){
       step(cur + 1);
+
+      if (cur < t.length)
+      {
+        if (!!Tour.onstep)
+        {
+          Tour.onstep(t[cur]);
+        }
+      }
+      else if (cur == t.length)
+      {
+        if (!!Tour.onfinish)
+        {
+          Tour.onfinish();
+        }
+      }
     },
 
     prev: function(){
       step(cur - 1);
+
+      if (cur >= 0)
+      {
+        if (!!Tour.onstep)
+        {
+          Tour.onstep(t[cur]);
+        }
+      }
     },
 
     current: function(){
       return cur;
+    },
+
+    close: function(){
+      step(-1);
+
+      if (!!Tour.onclose)
+      {
+        Tour.onclose();
+      }
+    },
+
+    onstart: null,
+    onfinish: null,
+    onclose: null,
+    onstep: null,
+
+    onresize: function(){
+      var n = cur - 1;
+      step(-1);
+      cur = n;
+
+      setTimeout(function(){
+        Tour.next();
+      }, 20);
     }
   };
 })();
