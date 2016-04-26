@@ -9,14 +9,7 @@
   <script src="dknotus-tour.js"></script>
   <script type="text/javascript">
     $(function(){
-      var lst = [];
-
-      $('#languagesList dd').each(function(k, v){
-        lst.push('<li>' + $(v).text() + '</li>');
-      });
-
-      $('#languages').html(lst.join(''));
-      $('#languagesCount').html(lst.length);
+      $('#languagesCount').html($('#languagesList dd').length);
     });
   </script>
 </head>
@@ -34,13 +27,15 @@
       <div class="row">
         <div class="col-xs-9" style="height: 1200px">
           <p class="lead">
-            This is compact solution for guided tours though web pages that we have developed because we havent found any
-            as small and as simple. It requires only two very common dependencies: <strong>jQuery</strong>
-            and <strong>Bootstrap</strong>. We hope you enjoy it.
+            This compact solution for guided tours has <strong>27 languges support</strong>.
+            It  requires only two very common dependencies: <strong>jQuery</strong>
+            and <strong>Bootstrap</strong>. Also has usefull features like <strong>auto scroll</strong>
+            and <strong>"spotlight"</strong>.
+            We hope you enjoy it.
           </p>
 
           <p>
-            We tryed to keep all data regarding usage as short as useable, and as short as possible.
+            We tryed to keep all data regarding usage as short as possible.
           </p>
 
           <h2 id="features">1. Features</h2>
@@ -50,21 +45,20 @@
           </p>
 
           <dl class="dl-horizontal">
-            <td>small requirenments</td>
-            <dd>only <strong>jQuery</strong> and <strong>Bootstrap</strong>;</td>
+            <dt>small requirenments</dt>
+            <dd>only <strong>jQuery</strong> and <strong>Bootstrap</strong>;</dd>
 
-            <td>simple usage</td>
-            <dd>one function ffor basic usage - yes, it' that simple;</td>
+            <dt>simple usage</dt>
+            <dd>one function for common usage - yes, it's that simple;</dd>
 
-            <td>events</td>
-            <dd>for advanced programers usage;</td>
+            <dt>events</dt>
+            <dd>for advanced programers usage;</dd>
 
-            <td>scroll</td>
-            <dd>it's important for us, so it might be important for you;</td>
+            <dt>scroll</dt>
+            <dd>and some more usefull features;</dd>
 
-            <td>translations</td>
-            <dd><span id="languagesCount"></span> languages:<ul id="languages">
-            </ul></td>
+            <dt>translations</dt>
+            <dd><span id="languagesCount"></span> languages support.</dd>
           </dl>
 
           <h2 id="simple">2. Simple use case</h2>
@@ -255,11 +249,86 @@
                 <td>
                   Defines interface language. Available languages:
                   <dl id="languagesList" class="dl-horizontal">
-                    <td>en</td>
-                    <dd>English</td>
+                    <dt>en</dt>
+                    <dd>English (default)</dd>
 
-                    <td>pl</td>
-                    <dd>Polish</td>
+                    <dt>pl</dt>
+                    <dd>Polish</dd>
+
+                    <dt>be</dt>
+                    <dd>Belarusian</dd>
+
+                    <dt>ca</dt>
+                    <dd>Catalan</dd>
+
+                    <dt>cs</dt>
+                    <dd>Czech</dd>
+
+                    <dt>da</dt>
+                    <dd>Danish</dd>
+
+                    <dt>de</dt>
+                    <dd>German</dd>
+
+                    <dt>el</dt>
+                    <dd>Greek</dd>
+
+                    <dt>es</dt>
+                    <dd>Spanish</dd>
+
+                    <dt>et</dt>
+                    <dd>Estonian</dd>
+
+                    <dt>fi</dt>
+                    <dd>Finnish</dd>
+
+                    <dt>fr</dt>
+                    <dd>French</dd>
+
+                    <dt>hu</dt>
+                    <dd>Hungarian</dd>
+
+                    <dt>it</dt>
+                    <dd>Italian</dd>
+
+                    <dt>lt</dt>
+                    <dd>Lithuanian</dd>
+
+                    <dt>lv</dt>
+                    <dd>Latvian</dd>
+
+                    <dt>mk</dt>
+                    <dd>Macedonian</dd>
+
+                    <dt>nl</dt>
+                    <dd>Dutch</dd>
+
+                    <dt>no</dt>
+                    <dd>Norwegian</dd>
+
+                    <dt>pt</dt>
+                    <dd>Portuguese</dd>
+
+                    <dt>ru</dt>
+                    <dd>Russian</dd>
+
+                    <dt>sk</dt>
+                    <dd>Slovak</dd>
+
+                    <dt>sl</dt>
+                    <dd>Slovenian</dd>
+
+                    <dt>sq</dt>
+                    <dd>Albanian</dd>
+
+                    <dt>sv</dt>
+                    <dd>Swedish</dd>
+
+                    <dt>tr</dt>
+                    <dd>Turkish</dd>
+
+                    <dt>uk</dt>
+                    <dd>Ukrainian</dd>
                   </dl>
                 </td>
               </tr>

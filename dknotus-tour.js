@@ -3,21 +3,121 @@ var Tour = (function(){
       o, cur
       T = {
         step: {
-          en: 'step',
-          pl: 'krok'
+          pl: "krok",
+          en: "step",
+          be: "крок",
+          ca: "pas",
+          cs: "krok",
+          da: "trin",
+          de: "Schritt",
+          el: "βήμα",
+          es: "paso",
+          et: "samm",
+          fi: "vaihe",
+          fr: "étape",
+          hu: "lépés",
+          it: "passo",
+          lt: "žingsnis",
+          lv: "solis",
+          mk: "чекор",
+          nl: "stap",
+          no: "trinn",
+          pt: "passo",
+          ru: "шаг",
+          sk: "krok",
+          sl: "korak",
+          sq: "hapi",
+          sv: "steg",
+          tr: "adım",
+          uk: "крок"
         },
-        next: {
-          en: 'Next',
-          pl: 'Nastepny'
+        Next: {
+          pl: "Następny",
+          en: "Next",
+          be: "Далей",
+          ca: "Següent",
+          cs: "Další",
+          da: "Næste",
+          de: "Weiter",
+          el: "Την επόμενη",
+          es: "Siguiente",
+          et: "Järgmine",
+          fi: "Seuraava",
+          fr: "Prochaine",
+          hu: "Következő",
+          it: "Accanto",
+          lt: "Kitas",
+          lv: "Nākamā",
+          mk: "Следна",
+          nl: "Volgende",
+          no: "Neste",
+          pt: "Próximo",
+          ru: "Далее",
+          sk: "Ďalej",
+          sl: "Naprej",
+          sq: "Tjetër",
+          sv: "Nästa",
+          tr: "Gelecek",
+          uk: "Далі"
         },
-        prev: {
-          en: 'Previous',
-          pl: 'Poprzedni'
+        Previous: {
+          pl: "Poprzedni",
+          en: "Previous",
+          be: "Папярэдні",
+          ca: "Anteriors",
+          cs: "Předchozí",
+          da: "Tidligere",
+          de: "Vorherige",
+          el: "Προηγούμενο",
+          es: "Anterior",
+          et: "Eelmine",
+          fi: "Edellinen",
+          fr: "Précédente",
+          hu: "Előző",
+          it: "Precedente",
+          lt: "Ankstesnis",
+          lv: "Iepriekšējā",
+          mk: "Претходна",
+          nl: "Vorige",
+          no: "Tidligere",
+          pt: "Anterior",
+          ru: "Предыдущий",
+          sk: "Predchádzajúce",
+          sl: "Prejšnji",
+          sq: "E mëparshme",
+          sv: "Föregående",
+          tr: "Önceki",
+          uk: "Попередній"
         },
-        finish: {
-          en: 'Finish',
-          pl: 'Zakończ'
-        },
+        Finish: {
+          pl: "Zakończ",
+          en: "Finish",
+          be: "Аздабленне",
+          ca: "Acabat",
+          cs: "Dokončit",
+          da: "Finish",
+          de: "Finish",
+          el: "Τελειώνει",
+          es: "Acabado",
+          et: "Lõpeta",
+          fi: "Loppuun",
+          fr: "Finition",
+          hu: "Befejezés",
+          it: "Finitura",
+          lt: "Apdaila",
+          lv: "Apdare",
+          mk: "Заврши",
+          nl: "Afwerking",
+          no: "Ferdig",
+          pt: "Acabamento",
+          ru: "Отделка",
+          sk: "Povrch",
+          sl: "Zaključek",
+          sq: "Finish",
+          sv: "Avsluta",
+          tr: "Bitir",
+          uk: "Оздоблення"
+        }
       };
 
   function _t(s)
@@ -45,8 +145,8 @@ var Tour = (function(){
           '</div>',
           '<div class="panel-footer">',
             '<div class="pull-right">',
-              '<div class="tourPrev btn btn-default btn-sm">' + _t('prev') + '</div> ',
-              '<div class="tourNext btn btn-primary btn-sm">' + _t('next') + '</div>',
+              '<div class="tourPrev btn btn-default btn-sm">' + _t('Previous') + '</div> ',
+              '<div class="tourNext btn btn-primary btn-sm">' + _t('Next') + '</div>',
             '</div>',
             '<h6>' + _t('step') + ' ' + (n + 1) + ' / ' + t.length + '</h6>',
           '</div>',
@@ -185,7 +285,7 @@ var Tour = (function(){
 
     if (n > t.length - 2)
     {
-      $('.tourNext').text(_t('finish'));
+      $('.tourNext').text(_t('Finish'));
     }
 
     $('.tourNext').click(Tour.next);
@@ -211,18 +311,20 @@ var Tour = (function(){
           close: true,
           content: '',
           language: 'en',
-          padding: 3,
+          padding: 5,
           position: 'right',
           scroll: true,
           spotlight: true
         };
 
-        $(options).each(function(k, v){
-          o[k] = v;
-        });
+        for (var k in options)
+        {
+          o[k] = options[k];
+        }
 
         $(tour).each(function(k, v){
-          for (var kk in o) {
+          for (var kk in o)
+          {
             if (typeof v[kk] == 'undefined')
             {
               v[kk] = o[kk];
