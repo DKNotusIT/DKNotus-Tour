@@ -197,7 +197,9 @@ There are four events that can be used by developers:
 ```
 
 ## 6. Tour interface
+
 #### Methods
+
 Method | Description
 ------ | -----------
 **Tour.run( tourDescription, globlOptions )** | Function for running Tour.
@@ -208,7 +210,7 @@ Method | Description
 
 #### Events
 
-By default all except onresize are set to null.
+By default all except `onresize` are set to null.
 
 Event | Description
 ----- | -----------
@@ -217,5 +219,5 @@ Event | Description
 **Tour.onclose** | Triggered when Close button is pressed ( Tour.close() ).
 **Tour.onstep** | Triggered on every step shown ( Tour.next() or Tour.prev() ).
 **Tour.onresize** | By default this one is set.
-## 7. Contact# DKNotus-Tour
-Simple library for creating guided tours on your page ( requires only jQuery and Bootstrap )
+
+## 7. Contact
