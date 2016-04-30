@@ -1,3 +1,14 @@
+/*!
+ * DK Notus Tour JavaScript Library v1.0
+ * https://github.com/DKNotusIT/DKNotus-Tour/
+ *
+ * Copyright DK Notus and other contributors
+ * Released under the MIT license
+ * https://github.com/DKNotusIT/DKNotus-Tour/blob/master/LICENSE
+ *
+ * Date: 2016-04-30
+ */
+
 var Tour = (function(){
   var t = [],
       o, cur
