@@ -1,16 +1,16 @@
 # DK Notus Tour
 
-#### This compact solution for guided tours has 27 languges support. It requires only two very common dependencies: **jQuery** and **Bootstrap**. Also has usefull features like auto scroll and "spotlight". We hope you enjoy it.
+#### This compact solution for guided tours has 27 languages support. It requires only two very common dependencies: **jQuery** and **Bootstrap**. Also has useful features like auto scroll and "spotlight". We hope you enjoy it.
 
-We tryed to keep all data regarding usage as short as possible.
+We tried to keep all data regarding usage as short as possible.
 ## 1. Features
 
 Features that we considerble important:
 
- - **small requirenments** - only jQuery and Bootstrap;
+ - **small requirements** - only jQuery and Bootstrap;
  - **simple usage** - one function for common usage - yes, it's that simple;
- - **events** - for advanced programers usage;
- - **scroll** - and some more usefull features;
+ - **events** - for advanced programmers usage;
+ - **scroll** - and some more useful features;
  - **multi elements selection** - you can point more then one element for one tour step;
  - **translations** - 27 languages support.
 
@@ -83,7 +83,7 @@ Possible parameters for hints descriptions and for global options:
 
 Parameter |	Default value | Description
 --------- | ------------- | -----------
-element | *none* | jQuery element (might be more then one), if it's not set then hint is skiped.
+element | *none* | jQuery element (might be more then one), if it's not set then hint is skipped.
 content | *empty string* | It's for contents of particular hints.
 close | true | Defines if close button should be shown.
 language | en | Defines interface language. Available languages:
@@ -114,13 +114,13 @@ language | en | Defines interface language. Available languages:
 || sv | Swedish
 || tr | Turkish
 || uk | Ukrainian
-padding | 5 | Extra space around tour exposed elements. (Has only sense when sptlight option is true).
-position | right | Determines where hint shoul be shown relativly to element it describes.
+padding | 5 | Extra space around tour exposed elements. (Has only sense when spotlight option is true).
+position | right | Determines where hint should be shown relatively to element it describes.
 ||| Possible values: right, left, top and bottom.
 scroll | true | If true then scrolls window so selected element and hint would be as close as possible to the view center.
 spotlight | true | If true then covers everything except selected element and hint with shadow.
 
-All above options can be used for both: single hint description and for global options. With global options previous example can be writen like:
+All above options can be used for both: single hint description and for global options. With global options previous example can be written like:
 
 ```javascript
   $(function(){
@@ -156,7 +156,7 @@ All above options can be used for both: single hint description and for global o
 
 There are four events that can be used by developers:
 
- - **onstart** - Trigered when new tour starts ( `Tour.run()` );
+ - **onstart** - Triggered when new tour starts ( `Tour.run()` );
  - **onfinish** - Triggered when Finish button is clicked;
  - **onclose** - Triggered when Close button is pressed ( `Tour.close()` );
  - **onstep** - Triggered on every step shown ( `Tour.next()` or `Tour.prev()` );
@@ -205,7 +205,7 @@ Method | Description
 **Tour.run( tourDescription, globlOptions )** | Function for running Tour.
 **Tour.next()** | Goes to next tour step.
 **Tour.prev()** | Goes to previous tour step.
-**Tour.close()** | Interupts tour and closes it.
+**Tour.close()** | Interrupts tour and closes it.
 **Tour.current()** | Returns current step description.
 
 #### Events
@@ -214,7 +214,7 @@ By default all except `onresize` are set to null.
 
 Event | Description
 ----- | -----------
-**Tour.onstart** | Trigered when new tour starts ( Tour.run() ).
+**Tour.onstart** | Triggered when new tour starts ( Tour.run() ).
 **Tour.onfinish** | Triggered when Finish button is clicked.
 **Tour.onclose** | Triggered when Close button is pressed ( Tour.close() ).
 **Tour.onstep** | Triggered on every step shown ( Tour.next() or Tour.prev() ).
