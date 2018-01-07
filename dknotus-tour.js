@@ -9,7 +9,7 @@
  * Date: 2016-04-30
  */
 
-var Tour = (function(){
+var Tour = (function() {
   var t = [],
       o, cur
       T = {
@@ -131,18 +131,15 @@ var Tour = (function(){
         }
       };
 
-  function _t(s)
-  {
+  function _t(s) {
     return typeof T[s][t[cur].language] == 'undefined' ? T[s]['en'] : T[s][t[cur].language];
   }
 
-  function step(n)
-  {
+  function step(n) {
     cur = n;
     $('.tourStep, .tourBg').remove();
 
-    if (!t[n])
-    {
+    if (!t[n]) {
       return;
     }
 
@@ -173,19 +170,18 @@ var Tour = (function(){
         x = 0,
         y = 0;
 
-    if (t[n].element && !!t[n].element.length)
-    {
+    if (t[n].element && !!t[n].element.length) {
       var x1 = 1e6,
           y1 = 1e6,
           x2 = 0,
           y2 = 0;
 
-      t[n].element.each(function(k, v){
+      t[n].element.each(function(k, v) {
         var ofs = $(v).offset();
-        x1 = Math.min(x1, ofs.left);
-        y1 = Math.min(y1, ofs.top);
+        x1 = Math.min(x1, ofs.left + t[n].forceCorrectionLeft);
+        y1 = Math.min(y1, ofs.top + t[n].forceCorrectionTop);
 
-        x2 = Math.max(x2, ofs.left
+        x2 = Math.max(x2, ofs.left + t[n].forceCorrectionLeft + t[n].forceCorrectionWidth
           + parseInt($(v).css('border-left-width'))
           + parseInt($(v).css('padding-left'))
           + $(v).width()
@@ -193,7 +189,7 @@ var Tour = (function(){
           + parseInt($(v).css('border-right-width'))
         );
 
-        y2 = Math.max(y2, ofs.top
+        y2 = Math.max(y2, ofs.top + t[n].forceCorrectionTop + t[n].forceCorrectionHeight
           + parseInt($(v).css('border-top-width'))
           + parseInt($(v).css('padding-top'))
           + $(v).height()
@@ -202,8 +198,7 @@ var Tour = (function(){
         );
       });
 
-      switch (t[n].position)
-      {
+      switch (t[n].position) {
         case 'top':
           y = y1 - el.height();
           x = ((x1 + x2) >> 1) - (el.width() >> 1);
@@ -234,8 +229,7 @@ var Tour = (function(){
       })
       .show();
 
-    if (t[n].spotlight)
-    {
+    if (t[n].spotlight) {
       var p = t[n].padding;
       $('body').append(Array(5).join('<div class="tourBg"></div>'));
 
@@ -278,8 +272,7 @@ var Tour = (function(){
         });
     }
 
-    if (!!t[n].scroll)
-    {
+    if (!!t[n].scroll) {
       var my = ((Math.min(y, y1) + Math.max(y + el.height(), y2)) >> 1) - ($(window).height() >> 1),
           mx = ((Math.min(x, x1) + Math.max(x + el.width(),  x2)) >> 1) - ($(window).width()  >> 1);
 
@@ -289,13 +282,11 @@ var Tour = (function(){
       });
     }
 
-    if (!n)
-    {
+    if (!n) {
       $('.tourPrev').remove();
     }
 
-    if (n > t.length - 2)
-    {
+    if (n > t.length - 2) {
       $('.tourNext').text(_t('Finish'));
     }
 
@@ -304,17 +295,15 @@ var Tour = (function(){
     $('.tourClose').click(Tour.close);
   }
 
-  $(window).on('resize', function(){
-    if (!!Tour.onresize)
-    {
+  $(window).on('resize', function() {
+    if (!!Tour.onresize) {
       Tour.onresize();
     }
   });
 
   return {
-    run: function(tour, options){
-      try
-      {
+    run: function(tour, options) {
+      try {
         t = [];
         cur = 0;
 
@@ -325,54 +314,46 @@ var Tour = (function(){
           padding: 5,
           position: 'right',
           scroll: true,
-          spotlight: true
+          spotlight: true,
+          forceCorrectionLeft: 0,
+          forceCorrectionTop: 0,
+          forceCorrectionWidth: 0,
+          forceCorrectionHeight: 0
         };
 
-        for (var k in options)
-        {
+        for (var k in options) {
           o[k] = options[k];
         }
 
-        $(tour).each(function(k, v){
-          for (var kk in o)
-          {
-            if (typeof v[kk] == 'undefined')
-            {
+        $(tour).each(function(k, v) {
+          for (var kk in o) {
+            if (typeof v[kk] == 'undefined') {
               v[kk] = o[kk];
             }
           };
 
-          if (v.element && !!v.element.length)
-          {
+          if (v.element && !!v.element.length) {
             t.push(v);
           }
         });
 
         step(cur);
 
-        if (!!Tour.onstart)
-        {
+        if (!!Tour.onstart) {
           Tour.onstart();
         }
-      }
-      catch(e)
-      {}
+      } catch(e) {}
     },
 
-    next: function(){
+    next: function() {
       step(cur + 1);
 
-      if (cur < t.length)
-      {
-        if (!!Tour.onstep)
-        {
+      if (cur < t.length) {
+        if (!!Tour.onstep) {
           Tour.onstep(t[cur]);
         }
-      }
-      else if (cur == t.length)
-      {
-        if (!!Tour.onfinish)
-        {
+      } else if (cur == t.length) {
+        if (!!Tour.onfinish) {
           Tour.onfinish();
         }
       }
@@ -381,10 +362,8 @@ var Tour = (function(){
     prev: function(){
       step(cur - 1);
 
-      if (cur >= 0)
-      {
-        if (!!Tour.onstep)
-        {
+      if (cur >= 0) {
+        if (!!Tour.onstep) {
           Tour.onstep(t[cur]);
         }
       }
@@ -397,8 +376,7 @@ var Tour = (function(){
     close: function(){
       step(-1);
 
-      if (!!Tour.onclose)
-      {
+      if (!!Tour.onclose) {
         Tour.onclose();
       }
     },
@@ -408,12 +386,12 @@ var Tour = (function(){
     onclose: null,
     onstep: null,
 
-    onresize: function(){
+    onresize: function() {
       var n = cur - 1;
       step(-1);
       cur = n;
 
-      setTimeout(function(){
+      setTimeout(function() {
         Tour.next();
       }, 20);
     }

@@ -2,6 +2,8 @@
 
 #### This compact solution for guided tours has 27 languages support. It requires only two very common dependencies: **jQuery** and **Bootstrap**. Also has useful features like auto scroll and "spotlight". We hope you enjoy it.
 
+![DK Notus Tour](DKNotusTour.png)
+
 We tried to keep all data regarding usage as short as possible.
 ## 1. Features
 
@@ -119,6 +121,10 @@ position | right | Determines where hint should be shown relatively to element i
 ||| Possible values: right, left, top and bottom.
 scroll | true | If true then scrolls window so selected element and hint would be as close as possible to the view center.
 spotlight | true | If true then covers everything except selected element and hint with shadow.
+forceCorrectionLeft | 0 | Useful if for some reason left offset needs to be modified.
+forceCorrectionTop | 0 | Useful if for some reason top offset needs to be modified.
+forceCorrectionWidth | 0 | Useful if for some reason width needs to be modified.
+forceCorrectionHeight | 0 | Useful if for some reason height needs to be modified.
 
 All above options can be used for both: single hint description and for global options. With global options previous example can be written like:
 
@@ -221,3 +227,5 @@ Event | Description
 **Tour.onresize** | By default this one is set.
 
 ## 7. Contact
+
+Jan Doleczek <jan@doleczek.pl>
