@@ -576,7 +576,10 @@
                   },
                   {
                     element: $('#eventBtn3').add('#eventBtn4'),
-                    content: 'or videos?'
+                    content: 'or videos?',
+                    onstep: function(currentStep) {
+                      console.log('Events defined in step, overwrites global definition');
+                    }
                   }
                 ]);
               });
@@ -619,7 +622,10 @@
         },
         {
           element: $('#eventBtn3').add('#eventBtn4'),
-          content: 'or videos?'
+          content: 'or videos?',
+          onstep: function(currentStep) {
+            console.log('Events defined in step, overwrites global definition');
+          }
         }
       ]);
     });

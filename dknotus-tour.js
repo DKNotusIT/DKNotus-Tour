@@ -1,12 +1,12 @@
 /*!
- * DK Notus Tour JavaScript Library v1.0
+ * DK Notus Tour JavaScript Library v1.2
  * https://github.com/DKNotusIT/DKNotus-Tour/
  *
  * Copyright DK Notus and other contributors
  * Released under the MIT license
  * https://github.com/DKNotusIT/DKNotus-Tour/blob/master/LICENSE
  *
- * Date: 2016-04-30
+ * Date: 2018-03-17
  */
 
 var Tour = (function() {
@@ -132,7 +132,7 @@ var Tour = (function() {
       };
 
   function _t(s) {
-    return typeof T[s][t[cur].language] == 'undefined' ? T[s]['en'] : T[s][t[cur].language];
+    return T[s][t[cur].language] || T[s]['en'];
   }
 
   function step(n) {
@@ -290,9 +290,12 @@ var Tour = (function() {
       $('.tourNext').text(_t('Finish'));
     }
 
-    $('.tourNext').click(Tour.next);
-    $('.tourPrev').click(Tour.prev);
-    $('.tourClose').click(Tour.close);
+    $('.tourStep')
+      .on('click', '.tourNext:not([disabled])', Tour.next)
+      .on('click', '.tourPrev:not([disabled])', Tour.prev)
+      .on('click', '.tourClose:not([disabled])', Tour.close);
+
+    (t[n].onstep || Tour.onstep || function(){})(t[n]);
   }
 
   $(window).on('resize', function() {
@@ -318,7 +321,8 @@ var Tour = (function() {
           forceCorrectionLeft: 0,
           forceCorrectionTop: 0,
           forceCorrectionWidth: 0,
-          forceCorrectionHeight: 0
+          forceCorrectionHeight: 0,
+          onstep: null,
         };
 
         for (var k in options) {
@@ -327,9 +331,7 @@ var Tour = (function() {
 
         $(tour).each(function(k, v) {
           for (var kk in o) {
-            if (typeof v[kk] == 'undefined') {
-              v[kk] = o[kk];
-            }
+            v[kk] = v[kk] || o[kk];
           };
 
           if (v.element && !!v.element.length) {
@@ -348,11 +350,7 @@ var Tour = (function() {
     next: function() {
       step(cur + 1);
 
-      if (cur < t.length) {
-        if (!!Tour.onstep) {
-          Tour.onstep(t[cur]);
-        }
-      } else if (cur == t.length) {
+      if (cur == t.length) {
         if (!!Tour.onfinish) {
           Tour.onfinish();
         }
@@ -361,12 +359,6 @@ var Tour = (function() {
 
     prev: function(){
       step(cur - 1);
-
-      if (cur >= 0) {
-        if (!!Tour.onstep) {
-          Tour.onstep(t[cur]);
-        }
-      }
     },
 
     current: function(){

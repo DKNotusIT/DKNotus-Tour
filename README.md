@@ -196,7 +196,10 @@ There are four events that can be used by developers:
         },
         {
           element: $('#eventBtn3').add('#eventBtn4'),
-          content: 'or videos?'
+          content: 'or videos?',
+          onstep: function(currentStep) {
+            console.log('Events defined in step, overwrites global definition');
+          }
         }
       ]);
     });
