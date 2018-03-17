@@ -162,11 +162,11 @@ All above options can be used for both: single hint description and for global o
 
 There are four events that can be used by developers:
 
- - **onstart** - Triggered when new tour starts ( `Tour.run()` );
- - **onfinish** - Triggered when Finish button is clicked;
- - **onclose** - Triggered when Close button is pressed ( `Tour.close()` );
- - **onstep** - Triggered on every step shown ( `Tour.next()` or `Tour.prev()` );
- - **onresize** - By default this one is set.
+ - **onstart()** - Triggered when new tour starts ( `Tour.run()` );
+ - **onfinish()** - Triggered when Finish button is clicked;
+ - **onclose()** - Triggered when Close button is pressed ( `Tour.close()` );
+ - **onstep( currentStep )** - Triggered on every step shown ( `Tour.next()` or `Tour.prev()` );
+ - **onresize()** - By default this one is set.
 
 ```javascript
   $(function(){
@@ -183,8 +183,9 @@ There are four events that can be used by developers:
         console.log('Tour interupted');
       };
 
-      Tour.onstep = function(){
+      Tour.onstep = function(currentStep){
         console.log('"That\'s one small step for a man ..."');
+        console.log(currentStep);
       };
 
       Tour.run([
@@ -220,11 +221,11 @@ By default all except `onresize` are set to null.
 
 Event | Description
 ----- | -----------
-**Tour.onstart** | Triggered when new tour starts ( Tour.run() ).
-**Tour.onfinish** | Triggered when Finish button is clicked.
-**Tour.onclose** | Triggered when Close button is pressed ( Tour.close() ).
-**Tour.onstep** | Triggered on every step shown ( Tour.next() or Tour.prev() ).
-**Tour.onresize** | By default this one is set.
+**Tour.onstart()** | Triggered when new tour starts ( Tour.run() ).
+**Tour.onfinish()** | Triggered when Finish button is clicked.
+**Tour.onclose()** | Triggered when Close button is pressed ( Tour.close() ).
+**Tour.onstep( currentEvent )** | Triggered on every step shown ( Tour.next() or Tour.prev() ).
+**Tour.onresize()** | By default this one is set.
 
 ## 7. Contact
 

@@ -497,19 +497,19 @@
           </p>
 
           <dl class="dl-horizontal">
-            <dt>onstart</dt>
+            <dt>onstart()</dt>
             <dd>Triggered when new tour starts ( <code>Tour.run()</code> ).</dd>
 
-            <dt>onfinish</dt>
+            <dt>onfinish()</dt>
             <dd>Triggered when Finish button is clicked.</dd>
 
-            <dt>onclose</dt>
+            <dt>onclose()</dt>
             <dd>
               Triggered when Close button is pressed
               ( <code>Tour.close()</code> ).
             </dd>
 
-            <dt>onstep</dt>
+            <dt>onstep( currentStep )</dt>
             <dd>
               Triggered on every step shown
               ( <code>Tour.next()</code> or <code>Tour.prev()</code> ).
@@ -563,8 +563,9 @@
                   console.log('Tour interupted');
                 };
 
-                Tour.onstep = function(){
+                Tour.onstep = function(currentStep){
                   console.log('"That\'s one small step for a man ..."');
+                  console.log(currentStep);
                 };
 
                 Tour.run([
@@ -605,8 +606,9 @@
         console.log('Tour interupted');
       };
 
-      Tour.onstep = function(){
+      Tour.onstep = function(currentStep){
         console.log('"That\'s one small step for a man ..."');
+        console.log(currentStep);
       };
 
       Tour.run([
@@ -674,31 +676,31 @@
             </thead>
             <tbody>
               <tr>
-                <td>Tour.onstart</td>
+                <td>Tour.onstart()</td>
                 <td>
                   Triggered when new tour starts ( <code>Tour.run()</code> );
                 </td>
               </tr>
               <tr>
-                <td>Tour.onfinish</td>
+                <td>Tour.onfinish()</td>
                 <td>Triggered when Finish button is clicked;</td>
               </tr>
               <tr>
-                <td>Tour.onclose</td>
+                <td>Tour.onclose()</td>
                 <td>
                   Triggered when Close button is pressed
                   ( <code>Tour.close()</code> );
                 </td>
               </tr>
               <tr>
-                <td>Tour.onstep</td>
+                <td>Tour.onstep( currentStep )</td>
                 <td>
                   Triggered on every step shown
                   ( <code>Tour.next()</code> or <code>Tour.prev()</code> );
                 </td>
               </tr>
               <tr>
-                <td>Tour.onresize</td>
+                <td>Tour.onresize()</td>
                 <td>By default this one is set.</td>
               </tr>
             </tbody>
